@@ -4,7 +4,7 @@ import sys
 from random import randint
 from rain import Rain
 def check_event():
-	"""Êó±ê¼üÅÌ¿ØÖÆÍË³ö"""
+	"""é¼ æ ‡é”®ç›˜æ§åˆ¶é€€å‡º"""
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			sys.exit()
@@ -13,12 +13,13 @@ def check_event():
 				sys.exit()
 
 def screen_update(al_setting,screen,rains):
-	"""Ë¢ĞÂ½çÃæ"""
+	"""åˆ·æ–°ç•Œé¢"""
 	screen.fill(al_setting.bg_color)
 	rains.draw(screen)
 	pygame.display.flip()
+	
 def creat_rain(al_setting,screen,rain_number,rain_row,rains):
-	"""´´½¨£¨Ëæ»ú£©Ò»¸öÓêµÎ"""
+	"""åˆ›å»ºï¼ˆéšæœºï¼‰ä¸€ä¸ªé›¨æ»´"""
 	a = randint(0,1)
 	if a:
 		rain = Rain(al_setting,screen)
@@ -29,23 +30,24 @@ def creat_rain(al_setting,screen,rain_number,rain_row,rains):
 		rain.y = rain.height + 2 * rain.height * rain_row
 		rain.rect.y = rain.y
 		rains.add(rain)
+		
 def rain_numbers(al_setting,screen):
-	"""¼ÆËãÒ»ĞĞ×î¶àÄÜÈİÄÉÓêµÎÊı"""
+	"""è®¡ç®—ä¸€è¡Œæœ€å¤šèƒ½å®¹çº³é›¨æ»´æ•°"""
 	rain = Rain(al_setting,screen)
 	rain_numbers = int(al_setting.screen_width / (2 * rain.rect.width))
 	return rain_numbers
+
 def rain_get(al_setting,screen,rains):
-	"""Éú³ÉÓêµÎ"""
+	"""ç”Ÿæˆé›¨æ»´"""
 	rain = Rain(al_setting,screen)
-	#rain_numbers = int(al_setting.screen_width / (2 * rain.rect.width))
 	rain_rows = int(al_setting.screen_height / (2 * 
 	rain.rect.height))
 	for rain_row in range(rain_rows):
 		for rain_number in range(rain_numbers(al_setting,screen)):
 			creat_rain(al_setting,screen,rain_number,rain_row,rains)
-#		for rain_number in range(rain_numbers(al_setting,screen)):
-#			creat_rain(al_setting,screen,rain_number,randint(0,9),rains)
+			
 def rain_update(al_setting,screen,rains):
+	"""æ›´æ–°é›¨æ»´ï¼Œå¦‚æœé›¨æ»´æ¶ˆå¤±ï¼Œé‡æ–°ç”Ÿæˆé›¨æ»´"""
 	rains.update()
 	screen_rect = screen.get_rect()
 	for rain in rains.copy():
